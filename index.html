@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<head>
+	<title>Hangman Game</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<h1>Star Trek Hangman</h1>
+
+	<h2>Save the Red Shirt.</h2>
+
+	<div id="game">---Welcome to the game Q---</div>
+
+	<div id="played">Played Letters: </div>
+
+	<script type="text/javascript">
+		
+		//PROPERTIES:
+		//make object that includes array for words
+
+		var gameDisplay = document.getElementById("game");
+
+		var gameWord;
+
+		var gameWordArray= [];
+
+		var blankWord= [];
+
+		var winCounter= 0;
+
+
+
+		var gameObject = { 
+			"words": [
+        	"klingon",
+        	"ferengi",
+        	"deep space nine"
+        	"archer",
+        	"tuvoc",
+        	"riker"
+        	"janeway",
+        	"kirk",
+        	"spock",
+        	"borg",
+        	"picard",
+        	"sulu",
+        	"sisko",
+        	"enterpise",
+        	"voyager",
+        	"defiant"
+        	]
+         }
+
+		//pull words from array randomly and determine their length 
+										
+			function selectWord() {
+
+
+		 		var gameWord = gameObject.words[Math.floor(Math.random() * gameObject.words.length)];
+
+		 		var playedLetter = [];
+		 		var win= 0;
+		 		var misses = 0;
+
+
+		 		//Resets
+		 		blankWord= [];
+		 		$("#game").html(blankWord);
+		 		$("#played").text("playedLetter: " + playedLetter);
+
+		 		//Build the check and blank arrays
+		 		for (var i = 0; i < gameWord.length; i++) {
+		 	 		blankWord.push("_ ");
+		 		}
+
+		 		for (var i = 0; i < gameWord.length; i++) {
+		 	 		gameWordArray.push(gameWord[i]);
+		 	 	}
+
+		 	 	//display blankWord
+ 				$("#game").html(blankWord);
+
+		 			 //ACCEPTING USER INPUT:
+			//use event to aquire user guesses
+
+			document.onkeyup = function(event) {
+
+      			var guess = event.key;
+      			
+      			if (playedLetter.includes(guess)){
+      				alert("You've already played" + guess);
+      				misses--;
+      			}
+
+      			playedLetter.push(guess);
+
+      			$("#played").text("playedLetter: " + playedLetter);
+
+      		//test guesses against gameWord string
+
+      			if (gameWord.includes(guess)) {
+
+      				// figure out what locations in the blankWord array to change.
+      				for (var i = gameWord.length - 1; i >= 0; i--) {
+      					if (gameWord[i] == guess) {
+      					// change the blank space associated with the letter chosen.
+      						//set blankWord[i] equal to gameword[i]
+      						blankWord[i] = gameWord[i];
+      						//redisplay blankWord.
+      						$("#game").html(blankWord);
+
+      						//add one point to win
+      						win++;
+
+      					} 
+      				}
+					
+				}else{ 
+					//subtract a chance.
+					misses++;
+					alert("not found");
+					console.log(misses);
+				//display next photo
+				// End game at loss
+				}
+
+				if (win == gameWord.length) {
+					alert("You Win!");
+					winCounter++;
+				}
+
+				if (misses === 10) {
+					alert("You let the Red Shirt die!!! Streak lost");
+					winCounter= 0;
+
+				}
+				
+
+		 	}
+
+
+
+		 }
+
+		 //ACCEPTING USER INPUT:
+			//use event to aquire user guesses
+
+	// document.onkeyup = function(event) {
+
+ //      var guess = event.key;
+
+ //      //test guesses against gameWord string
+
+ //      if (gameWord.includes(guess)) {
+ //      	for (var i = 0; i < gameWord.length; i++) {
+ //      		if gameWord[i] === guess{
+ //      			// change the blank space associated to the letter chosen. 
+ //      		}
+
+ //      	}else //subtract a chance.
+
+
+   //    }
+
+
+
+  	// }
+
+
+		 	// 	gameWord = "janeway";
+
+		 	// function wordBlank(){
+		 	// 	for (var i = 0; i < gameWord.length; i++) {
+		 	// 		console.log("_ ");
+		 	// 	}
+
+		 	// }
+
+
+
+		 //display above number of blank spaces
+		 	
+
+
+ 
+
+
+
+		//score in object wins and losses
+
+
+		//GAME FUNCTIONS:
+		//display above number of blank spaces
+		//populate game with the letters from the array
+
+		//loop, repeat for the length of the word or until player loses
+			//check letters against user inputs
+				//if the same, display that letter
+				//else, subtract one life, and display one new part completed
+				//player looses when life reaches zero and wins when letters remaining equals zero.
+
+
+		//ACCEPTING USER INPUT:
+			//use event to aquire user guesses
+
+
+
+
+
+
+
+	</script>
+
+
+
+</body>
+</html>
