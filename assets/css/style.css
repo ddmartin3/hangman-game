@@ -1,0 +1,34 @@
+body{
+	background-color: grey;
+}
+
+h1{
+	float: left;
+	background: black;
+	color: silver;
+	padding: 17px;
+}
+
+#startButton{
+    border: 2px;
+    border-style: solid;
+    color: #FF5722;
+    border-radius: 4px;
+}
+
+.row{
+	width: 100%;
+}
+
+#header{
+	clear: both;
+}
+
+.col-sm-3 img{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+#footer{
+	clear: both;
+}
